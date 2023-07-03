@@ -4,8 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "venvmgr"
-version = "0.1.0"
 dependencies = ["click"]
+authors = [{ name = "Andrew Fowlie", email = "andrew.fowlie@xjtlu.edu.cn" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+dynamic = ["version", "description"]
 
 [project.scripts]
 vm = "venvmgr.cli:commands"

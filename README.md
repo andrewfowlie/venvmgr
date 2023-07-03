@@ -2,26 +2,31 @@
 
 _👀 Manage Python virtual environments_
 
-A command line application to manage Python virtual envionrments (venvs). 
+## Install 💥
 
-Create a venv:
+```bash
+pipx install venvmgr
+```
+
+# Usage
+
+Create a venv named `example` using venvmgr
 
 ```bash
 $ vm create example
 ```
-Use it:
+Use it using venvmgr
 
 ```bash
 $ vm python --venv example code.py
 ```
 
-The assoications between files and venvs is recorded, such that
+The associations between files and venvs are recorded so that
 
 ```bash
 $ vm python code.py
 ```
-
-uses the `example` venv. We might want install packages in this venv, e.g.,
+now uses the `example` venv. We might want to install packages in this venv, e.g.,
 
 ```bash
 $ vm pip --venv example scipy
@@ -36,15 +41,12 @@ created at 2023-07-03 12:07:48.872147
 activate: source /home/user/.venvmgr/example/bin/activate
 used by: /home/user/code.py
 ```
+For more information, try `vm ls -l`.
 
-Lastll, we might want to activate this venv
+Lastly, we might want to activate this venv
 
 ```bash
 $ vm activate example
 ```
 
-## Install 💥
 
-```bash
-pipx install venvmgr
-```

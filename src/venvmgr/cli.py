@@ -11,7 +11,7 @@ from . import venvmgr
 from . import config
 
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 def get_venv_names(ctx, args, incomplete):

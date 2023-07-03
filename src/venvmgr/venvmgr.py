@@ -124,7 +124,7 @@ def create_if_not_exist(venv_name):
         if click.confirm(f"Create new venv '{venv_name}'?"):
             create(venv_name)
         else:
-            raise RuntimeError(f"Does not exist - {venv_name}")
+            raise click.BadParameter(f"The venv '{venv_name}' does not exist")
 
 
 def venv_must_exist(func):
@@ -187,7 +187,7 @@ def python(venv_name, file_name, *args, verbose=True, **kwargs):
     @brief Run a Python file in a virtual environment
     """
     if file_name is None and venv_name is None:
-        raise RuntimeError("Require venv name or file name")
+        raise click.UsageError("Require venv name or file name")
 
     if venv_name is None:
         venv_name = config.get(

@@ -186,20 +186,19 @@ def python(venv_name, file_name, *args, verbose=True, **kwargs):
     """
     @brief Run a Python file in a virtual environment
     """
-    abs_file_name = os.path.abspath(file_name)
-
     if file_name is None and venv_name is None:
         raise RuntimeError("Require venv name or file name")
 
     if venv_name is None:
         venv_name = config.get(
             config.ASSOCIATION).get(
-            abs_file_name,
+            os.path.abspath(file_name),
             default_venv_name(file_name))
 
     create_if_not_exist(venv_name)
 
-    config.set(config.ASSOCIATION, abs_file_name, venv_name)
+    if file_name is not None:
+        config.set(config.ASSOCIATION, os.path.abspath(file_name), venv_name)
 
     bin_python = locate(venv_name, "python")
 

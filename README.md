@@ -8,6 +8,12 @@ _👀 Manage Python virtual environments_
 pipx install venvmgr
 ```
 
+For autocompletion, excecute this or add it to your `.bashrc`
+
+```bash
+eval "$(_VM_COMPLETE=bash_source vm)"
+```
+
 # Usage
 
 Create a venv named `example` using venvmgr

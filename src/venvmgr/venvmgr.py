@@ -207,7 +207,13 @@ def python(venv_name, file_name, *args, verbose=True, **kwargs):
             f"python = {click.format_filename(bin_python)}",
             fg='green',
             bold=True)
-    return subprocess.run([bin_python] + list(args) + [file_name], check=False, **kwargs)
+
+    cli_args = list(args)
+
+    if file_name is not None:
+        cli_args.append(file_name)
+
+    return subprocess.run([bin_python] + cli_args, check=False, **kwargs)
 
 
 @venv_must_exist

@@ -16,6 +16,13 @@ import click
 from . import config
 
 
+def timestamp():
+    """
+    @brief Timestamp for venv creation etc
+    """
+    return datetime.datetime.now().isoformat(timespec='minutes')
+
+
 def locate(venv_name, bin_):
     """
     @brief Path to venv binaries
@@ -57,7 +64,7 @@ def create(venv_name, reqs=None):
     env = venv.EnvBuilder(with_pip=True)
     dir_env = os.path.join(config.VENV_DIR, venv_name)
     env.create(dir_env)
-    config.set(config.TIME, venv_name, datetime.datetime.now())
+    config.set(config.TIME, venv_name, timestamp())
 
     if reqs is None and os.path.isfile("requirements.txt"):
         reqs = "requirements.txt"
@@ -74,6 +81,9 @@ def ls(venv_names, long_=False):
         venv_names = os.listdir(config.VENV_DIR)
 
     for venv_name in sorted(venv_names):
+
+        if venv_name not in os.listdir(config.VENV_DIR):
+            raise click.BadParameter(f"The venv '{venv_name}' does not exist")
 
         yield click.style(venv_name, fg='green', bold=True)
 
@@ -170,7 +180,7 @@ def add(venv_name):
         os.path.join(
             config.VENV_DIR,
             os.path.basename(venv_name)))
-    config.set(config.TIME, venv_name, datetime.datetime.now())
+    config.set(config.TIME, venv_name, timestamp())
 
 
 def rm(venv_name):
